@@ -1,0 +1,51 @@
+<section class = search-app>
+<form class = "search-form">
+  <div class="form-group-personalId">
+    <label for="exampleInputPersonalId">Personal ID</label>
+    <input type="text" required #personal="ngModel"
+           [(ngModel)]="personalId" class="form-control"
+           id="exampleInputPersonalId"
+           pattern="^(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])(\d{2})-(0|1|2)(\d{4})$"
+           [class.is-invalid]="personal.invalid && personal.touched"
+           placeholder="Enter personal ID"
+           [ngModelOptions]="{standalone: true}">
+    <small class="text-danger" [class.d-none]="personal.valid || personal.untouched">Personal ID is required</small>
+  </div>
+
+  <div class="form-group-date">
+    <label for="exampleInputBirthDate">Birth Date</label>
+    <input type="text" required #dateOfBirth="ngModel"
+           [(ngModel)]="date"
+           class="form-control"
+               id="exampleInputBirthDate"
+          pattern="^\d{4}\.(0?[1-9]|1[012])\.(0?[1-9]|[12][0-9]|3[01])$"
+           [class.is-invalid]="dateOfBirth.invalid && dateOfBirth.touched"
+           placeholder="yyyy.MM.dd"
+           [ngModelOptions]="{standalone: true}">
+    <small class="text-danger" [class.d-none]="dateOfBirth.valid || dateOfBirth.untouched">Date is required</small>
+  </div>
+</form>
+    <div class ="search-btn">
+  <button type="submit" (click)="searchPersonByPersonalId(personalId,date)" class="btn btn-primary">Search</button>
+    </div>
+
+
+<div class="table">
+  <table class="table">
+    <thead>
+    <tr>
+      <th *ngFor=" let title of columnTitles">{{title}} </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let person of persons">
+      <td>{{person.id}}</td>
+      <td>{{person.firstName}}</td>
+      <td>{{person.lastName}}</td>
+      <td>{{person.personalId}}</td>
+      <td>{{person.gender}}</td>
+      <td>{{person.dateOfBirth}}</td>
+    </tbody>
+  </table>
+</div>
+</section>
